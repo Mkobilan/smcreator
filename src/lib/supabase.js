@@ -1,3 +1,4 @@
+import { createBrowserClient } from '@supabase/ssr'
 import { createClient } from '@supabase/supabase-js'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
@@ -7,9 +8,10 @@ if (!supabaseUrl || !supabaseAnonKey) {
   throw new Error('Missing Supabase environment variables')
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+// Browser client for client-side use
+export const supabase = createBrowserClient(supabaseUrl, supabaseAnonKey)
 
-// Helper to get service role client (only for use in API routes/Server Components)
+// Helper to get service role client (only for use in API routes)
 export const getServiceSupabase = () => {
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
   if (!serviceKey) {

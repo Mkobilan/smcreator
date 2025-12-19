@@ -1,7 +1,23 @@
-import { createPagesServerClient } from '@supabase/auth-helpers-nextjs';
+import { createServerClient } from '@supabase/ssr';
+import { serialize } from 'cookie';
 
 export const withAuth = (handler) => async (req, res) => {
-    const supabase = createPagesServerClient({ req, res });
+    const supabase = createServerClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+        {
+            cookies: {
+                getAll() {
+                    return Object.keys(req.cookies).map((name) => ({ name, value: req.cookies[name] }));
+                },
+                setAll(cookiesToSet) {
+                    cookiesToSet.forEach(({ name, value, options }) => {
+                        res.appendHeader('Set-Cookie', serialize(name, value, options));
+                    });
+                },
+            },
+        }
+    );
 
     const {
         data: { session },
