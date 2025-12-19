@@ -1,14 +1,13 @@
 import { createBrowserClient } from '@supabase/ssr'
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co'
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder'
 
-if (!supabaseUrl || !supabaseAnonKey) {
+if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
   if (process.env.NODE_ENV === 'production') {
-    console.warn('Supabase environment variables are missing. This might cause issues if this is a runtime environment.');
+    console.warn('Supabase environment variables are missing. This might cause issues if this is a runtime environment. Ensure they are set in Vercel settings.');
   } else {
-    // In dev, we still want to be alerted strongly
     console.error('Missing Supabase environment variables');
   }
 }
