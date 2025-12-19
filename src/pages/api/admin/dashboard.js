@@ -1,5 +1,5 @@
-import { supabase } from '../../lib/supabase';
-import { withAuth, isAdmin } from '../../lib/middleware';
+import { supabase } from '../../../lib/supabase';
+import { withAuth, isAdmin } from '../../../lib/middleware';
 
 export default withAuth(isAdmin(async function handler(req, res) {
     if (req.method !== 'GET') {

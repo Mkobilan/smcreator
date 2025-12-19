@@ -4,7 +4,6 @@ import Link from 'next/link';
 import axios from 'axios';
 import { useAuth } from '../../../context/AuthContext';
 import { useNotification } from '../../../contexts/NotificationContext';
-import OrderStatusBadge from '../../../components/orders/OrderStatusBadge';
 import {
   ShoppingBagIcon,
   ArrowLeftIcon,
