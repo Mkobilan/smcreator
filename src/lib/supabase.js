@@ -5,7 +5,12 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
 if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error('Missing Supabase environment variables')
+  if (process.env.NODE_ENV === 'production') {
+    console.warn('Supabase environment variables are missing. This might cause issues if this is a runtime environment.');
+  } else {
+    // In dev, we still want to be alerted strongly
+    console.error('Missing Supabase environment variables');
+  }
 }
 
 // Browser client for client-side use

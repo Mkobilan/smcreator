@@ -48,6 +48,8 @@ export const withAdmin = (handler) => async (req, res) => {
     })(req, res);
 };
 
+export const isAdmin = withAdmin;
+
 export const withSubscription = (handler) => async (req, res) => {
     return withAuth(async (req, res) => {
         if (!['active', 'trialing'].includes(req.user.subscription_status)) {
