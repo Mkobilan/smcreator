@@ -4,14 +4,14 @@ const nextConfig = {
   images: {
     domains: [
       'localhost',
-      'your-s3-bucket-name.s3.amazonaws.com', // Replace with your actual S3 bucket domain
+      'pdqhsxnkxltvfrcdzphg.supabase.co',
       'images.printify.com',
       'images-api.printify.com'
     ],
   },
   env: {
-    API_URL: process.env.API_URL || 'http://localhost:5002/api',
-    STRIPE_PUBLIC_KEY: process.env.STRIPE_PUBLIC_KEY
+    API_URL: process.env.API_URL || 'http://localhost:3000/api',
+    STRIPE_PUBLIC_KEY: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
   }
 }
 
